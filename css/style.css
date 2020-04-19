@@ -187,6 +187,39 @@ img {
     border-style: none;
 }
 
-.btn-dark{
+.bookmark{
+    color: #fff;
+    background-color: #78c2ad;
+    border-color: #78c2ad;
+    font-weight: bold;
     margin-bottom: 10px;
 }
+
+.carousel {
+    /* any dimensions are fine, it can be responsive with max-width */
+    width: 500px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .carousel-inner {
+    /* make sure your .items will get correct height */
+    height: 150%;
+  }
+  
+  .item {
+    margin-top: 20px;
+    background-size: cover;
+    background-position: 50% 50%;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .item img {
+    visibility: hidden;
+  }
+
+.carousel-control-prev-icon, .carousel-control-next-icon{
+    filter: invert(1);
+}
+

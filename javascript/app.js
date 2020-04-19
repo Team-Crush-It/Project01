@@ -16,6 +16,8 @@ var pics = $("#pics");
 var orgs = []
 var pets = []
 var zip = ''
+var distance = 100
+
 var totalPages = ''
 var markers = [];
 var config = {
@@ -65,8 +67,7 @@ function initMap() {
 
 // retrieve google maps API key from firebase then load the map
 database.ref().once('value').then(function (snap) {
-  //key = snap.val().gKey;
-  key = 'AIzaSyAac0W1FcByS8ETCOwZ7_1UXuBbVR89lCc'
+  key = snap.val().gKey;
   var tag = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&callback=initMap';
   var body = document.getElementById("main");
   var ele = document.createElement("script");
@@ -93,14 +94,12 @@ area.addEventListener("click", function () {
       };
       // retrieve api key then fetch geocode data
       database.ref().once('value').then(function (snap) {
-        //var key = snap.val().gKey;
-        var key = 'AIzaSyAac0W1FcByS8ETCOwZ7_1UXuBbVR89lCc'
+        var key = snap.val().gKey;
         var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=" + key;
         fetch(url).then((response) => {
           return response.json();
         })
           .then((data) => {
-            //city = data.results[0].address_components[6].long_name;
             var componentLength = data.results[0].address_components.length
             for (var i = 0; i < componentLength; i++) {
               if (data.results[0].address_components[i].long_name.length === 5) {
@@ -213,7 +212,11 @@ function getAnimals() {
     return resp.json();
   }).then(function (data) {
     // makes api call with search parameters
+<<<<<<< HEAD
     return fetch('https://api.petfinder.com/v2/animals?location=' + userLocation + '&limit=8' + '&type=' + type + '&breed=' + breed + '&gender=' + gender + '&page=' + page, {
+=======
+    return fetch('https://api.petfinder.com/v2/animals?location=' + userLocation + '&distance=' + distance + '&limit=9' + '&type=' + type + '&breed=' + breed + '&gender=' + gender + '&page=' + page, {
+>>>>>>> carousel
       headers: {
         'Authorization': data.token_type + ' ' + data.access_token,
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -235,9 +238,8 @@ function getAnimals() {
     for (var i = 0; i < results; i++) {
       var button = $("<button>")
       button.attr('type', 'button')
-      button.attr('bookmark')
       button.addClass("btn")
-      button.addClass("btn-dark")
+      button.addClass("bookmark")
       button.text('Bookmark')
       //console.log(results[i]);
       var div = $("<div>");
@@ -247,12 +249,20 @@ function getAnimals() {
       var disDiv = $("<div>")
       nameDiv.addClass('card-info');
       div.addClass('card');
+      var refId = data.animals[i].id
+      var url = data.animals[i].url
+      console.log(url)
+      console.log(refId)
+      button.attr('bookmark', refId)
+      button.attr('data-state', 'add')
+      button.attr('idk', url)
       var name = data.animals[i].name;
       var age = data.animals[i].age;
       var city = data.animals[i].contact.address.city
       var state = data.animals[i].contact.address.state
       var distance = data.animals[i].distance
       var picturetag = (data.animals[i].photos[0]?.large || "images/d6e35b19-3dee-41b3-b052-4e7e9db58292_200x200.png");
+      button.attr('src', picturetag)
       var disRound = Math.round(distance);
       div.append("<br>" + name + "<br>");
       div.append('<img src="' + picturetag + '"/>' + "<br>" + "<br>");
@@ -271,11 +281,35 @@ function getAnimals() {
        window.open($(this).attr("data-url"))
      })
      
-    $(".btn-dark").click(function(event){
+    $(".bookmark").click(function(event){
       event.stopPropagation()
-      alert("hi")
+      $(".carousel").show()
+      var url = $(this).attr('idk')
+      var toggle = $(this).attr('data-state')
+      var img = $("<img>")
+      var carouselDiv = $("<div>")
+      if (toggle === 'add'){
+      $(this).text('Remove')
+      carouselDiv.addClass("carousel-item")
+      img.attr('src', $(this).attr('src'))
+      img.attr('data-url', url)
+      img.addClass('d-block')
+      img.addClass('w-100')
+      img.addClass('car-image')
+      carouselDiv.append(img)
+      $(".carousel-inner").append(carouselDiv)
+      $("#carouselExampleControls").carousel(1)
+      $(this).attr('data-state', 'remove')
+      }else{
+        $(this).text('Bookmark')
+        $(this).attr('data-state', 'add')
+      }
+      $(document).on('click', '.car-image', function(){
+        window.open($(this).attr("data-url"))
+      })
+
     })
-    
+   
 
     console.log(results)
   }).catch(function (err) {
@@ -318,8 +352,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 function setMarker(address, titleText, htmlContent) {
   database.ref().once('value').then(function (snap) {
-    //var key = snap.val().gKey;
-    var key = "AIzaSyAac0W1FcByS8ETCOwZ7_1UXuBbVR89lCc"
+    var key = snap.val().gKey;
     var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + key;
     fetch(url).then(response => {
       return response.json();
@@ -351,8 +384,7 @@ function getZip(callback) {
       };
       // get user location based on coordinates
       database.ref().once('value').then(function (snap) {
-       // var key = snap.val().gKey;
-       var key = 'AIzaSyAac0W1FcByS8ETCOwZ7_1UXuBbVR89lCc'
+       var key = snap.val().gKey;
         var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=" + key;
         fetch(url).then(response => {
           return response.json();
@@ -411,6 +443,7 @@ submit.addEventListener("click", function (e) {
   type = $("#userAnimal").val().trim()
   breed = $("#userBreed").val().trim()
   gender = $("#userGender").val()
+  distance = parseInt($("#userDist").val())
   pics.html("")
   loading();
   getAnimals();
@@ -432,6 +465,11 @@ function loading() {
   loading.append(dogAnimation)
 }
 
+function carouselHide(){
+  $(".carousel").hide()
+}
+
 loading()
 pageNumber();
 getZip()
+carouselHide()
