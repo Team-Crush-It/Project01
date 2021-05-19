@@ -20,17 +20,19 @@ var distance = 100
 
 var totalPages = ''
 var markers = [];
-var config = {
-
-  apiKey: "AIzaSyDitAXjuCRaclQJVq-u8Lj5hXKu376wo0Y",
-  authDomain: "wisc-lc-cd1c2.firebaseapp.com",
-  databaseURL: "https://wisc-lc-cd1c2.firebaseio.com",
-  projectId: "wisc-lc-cd1c2",
-  storageBucket: "wisc-lc-cd1c2.appspot.com",
+var firebaseConfig = {
+  apiKey: "AIzaSyDx9AJil2cmsXMQfZdGI0Nz8W5XzCkiWC0",
+  authDomain: "pets-fur-friends-4ad35.firebaseapp.com",
+  projectId: "pets-fur-friends-4ad35",
+  storageBucket: "pets-fur-friends-4ad35.appspot.com",
+  messagingSenderId: "724660945175",
+  appId: "1:724660945175:web:e814fa87e10454b362f752",
+  measurementId: "G-9BV1R6D3J6",
+  databaseURL: "https://pets-fur-friends-4ad35-default-rtdb.firebaseio.com/"
 };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-// initialize firebase
-firebase.initializeApp(config);
 var database = firebase.database();
 
 function initMap() {
@@ -94,7 +96,7 @@ area.addEventListener("click", function () {
       };
       // retrieve api key then fetch geocode data
       database.ref().once('value').then(function (snap) {
-        var key = snap.val().gKey;
+       var key = snap.val().gKey;
         var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=" + key;
         fetch(url).then((response) => {
           return response.json();
@@ -204,15 +206,9 @@ function getAnimals() {
     return resp.json();
   }).then(function (data) {
     // makes api call with search parameters
-<<<<<<< HEAD
-<<<<<<< HEAD
-    return fetch('https://api.petfinder.com/v2/animals?location=' + userLocation + '&limit=8' + '&type=' + type + '&breed=' + breed + '&gender=' + gender + '&page=' + page, {
-=======
-    return fetch('https://api.petfinder.com/v2/animals?location=' + userLocation + '&distance=' + distance + '&limit=9' + '&type=' + type + '&breed=' + breed + '&gender=' + gender + '&page=' + page, {
->>>>>>> carousel
-=======
-    return fetch('https://api.petfinder.com/v2/animals?location=' + userLocation + '&distance=' + distance + '&limit=8' + '&type=' + type + '&breed=' + breed + '&gender=' + gender + '&page=' + page, {
->>>>>>> 00f803f9c3131e98a85cb6ca2133bb3904943bd0
+ return fetch('https://api.petfinder.com/v2/animals?location=' + userLocation + '&distance=' + distance + '&limit=9' + '&type=' + type + '&breed=' + breed + '&gender=' + gender + '&page=' + page, {
+
+
       headers: {
         'Authorization': data.token_type + ' ' + data.access_token,
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -298,6 +294,8 @@ function getAnimals() {
       $(this).attr('data-state', 'remove')
       }else{
         $(this).text('Bookmark')
+        $('.d-block').remove()
+        carouselDiv.append(img)
         $(this).attr('data-state', 'add')
       }
       $(document).on('click', '.car-image', function(){
@@ -348,7 +346,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 function setMarker(address, titleText, htmlContent) {
   database.ref().once('value').then(function (snap) {
-    var key = snap.val().gKey;
+   var key = snap.val().gKey;
 
     var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + key;
     fetch(url).then(response => {
@@ -381,7 +379,7 @@ function getZip(callback) {
       };
       // get user location based on coordinates
       database.ref().once('value').then(function (snap) {
-       var key = snap.val().gKey;
+      var key = snap.val().gKey;
         var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.lat + "," + pos.lng + "&key=" + key;
         fetch(url).then(response => {
           return response.json();
@@ -405,6 +403,7 @@ function getZip(callback) {
 }
 submit.addEventListener("click", function (e) {
   e.preventDefault();
+  document.getElementById('pics').scrollIntoView({ behavior: "smooth"} )
   if (markers.length > 0) {
     for (i = 0; i < markers.length; i++) {
       markers[i].setMap(null);

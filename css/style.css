@@ -17,7 +17,6 @@
   padding-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 60px;
   max-width: 100em;
   width: 100%;
 }
@@ -119,6 +118,7 @@ img {
     color: #5a5a5a;
     font-weight: 400;
     font-size: 25px;
+    margin-top: 40px;
 }
 
 #jumboH1 {
@@ -127,6 +127,10 @@ img {
 
 #userGender{
     margin-left: 0;
+}
+
+#inputHead1 {
+    margin-top: 40px;
 }
 
 .page-number {

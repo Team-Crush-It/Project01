@@ -1,0 +1,22 @@
+{
+  "name": "project1",
+  "version": "1.0.0",
+  "description": "## Pet Adoption App for Rescue Animals from Shelters (Name in Progress)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Crush-It/Project1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Team-Crush-It/Project1/issues"
+  },
+  "homepage": "https://github.com/Team-Crush-It/Project1#readme",
+  "dependencies": {
+    "dotenv": "^9.0.2"
+  }
+}
