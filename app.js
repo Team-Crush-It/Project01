@@ -435,7 +435,6 @@ submit.addEventListener("click", function (e) {
   } else {
     userLocation = zip + ',' + ' ' + state
   }
-  alert(userLocation)
   type = $("#userAnimal").val().trim()
   breed = $("#userBreed").val().trim()
   gender = $("#userGender").val()
