@@ -1,3 +1,5 @@
+/* JUMBOTRON */
+
 .jumbotron {
     justify-content: center;
     background-color: #78c2ad;
@@ -8,9 +10,19 @@
     margin-right: auto;
 }
 
+#jumboH1 {
+    background-color: #78c2ad;
+}
+
 .jumbotron h1 {
     color: #ffffff;
 }
+
+#jumboP {
+    font-style: italic;
+}
+
+/* MAIN CONTAINER FOR INPUT FORMS / MAP */
 
 #mainCont {
   background-color: #ffffff;
@@ -19,22 +31,6 @@
   margin-right: auto;
   max-width: 100em;
   width: 100%;
-}
-
-#img-Container {
-background-color: #ffffff;
-margin-left: auto;
-margin-right: auto;
-max-width: 100em;
-width: 100%;
-}
-
-#loading {
-background-color: #ffffff;
-margin-left: auto;
-margin-right: auto;
-max-width: 100em;
-width: 100%;
 }
 
 #map-area {
@@ -54,14 +50,65 @@ width: 100%;
     border-width: 4px;
 }
 
+#userLocation {
+    background-color: #ffffff;
+    color: #5a5a5a;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+#userGender {
+    margin-left: 0;
+}
+
+/* CONTAINER FOR IMAGE CARDS / LOADING SCREEN */
+
 #img-container {
-    
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100em;
+    width: 100%;
+}
+
+#img-container {
     background-color: #ffffff;
     margin-left: auto;
     margin-right: auto;
     max-width: 100em;
     width: 100%;
     
+}
+
+img {
+    margin-top: 40px;
+    object-fit: cover;
+    object-position: 100% 0;
+    width: 250px;
+    height: 250px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #78c2ad;
+}
+  
+    
+#loading {
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100em;
+    width: 100%;
+}
+
+#loading {
+    display: flex;
+    justify-content: center;
+    color: #888;
+    font-size: 50px;
+    background-color: #ffffff;
+    padding-top: 200px;
+
 }
 
 #pics {
@@ -82,29 +129,6 @@ width: 100%;
     opacity: inherit;
     color: #343a40;
     font-weight: bold;
-}
-
-img {
-  margin-top: 40px;
-  object-fit: cover;
-  object-position: 100% 0;
-  width: 250px;
-  height: 250px;
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #78c2ad;
-}
-
-.footer {
-    display: block;
-    background-color: #56CC9D;
-    color: #ffffff;
-    font-weight: bold;
-    margin-top: 5px;
-    max-width: 100em;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #pagButtons {
@@ -143,15 +167,38 @@ img {
     text-align: center;
 }
 
-#loading {
-    display: flex;
-    justify-content: center;
-    color: #888;
-    font-size: 50px;
-    background-color: #ffffff;
-    padding-top: 200px;
+/* CAROUSEL */
 
+.carousel {
+    /* any dimensions are fine, it can be responsive with max-width */
+    width: 500px;
+    height: 300px;
+    margin: 0 auto;
 }
+  
+.carousel-inner {
+    /* make sure your .items will get correct height */
+    height: 150%;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    filter: invert(1);
+}
+
+  
+.item {
+    margin-top: 20px;
+    background-size: cover;
+    background-position: 50% 50%;
+    width: 100%;
+    height: 100%;
+}
+  
+.item img {
+    visibility: hidden;
+}
+
+/* IMAGE CARDS */
 
 .card {
     display: inline-table;
@@ -170,20 +217,22 @@ img {
     color: #888;
 }
 
-#info-name {
-    font-weight: bold;
-}
-
 .card:hover {
     transform: scale(1.15);
     box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
   }
-  .card {
+
+.card {
 
     transition: 0.5s ease;
     cursor: pointer;
     margin:30px;
-  }
+}
+
+#info-name {
+    font-weight: bold;
+}
+
 
 .yo {
     width: 200px;
@@ -199,30 +248,15 @@ img {
     margin-bottom: 10px;
 }
 
-.carousel {
-    /* any dimensions are fine, it can be responsive with max-width */
-    width: 500px;
-    height: 300px;
-    margin: 0 auto;
-  }
-  
-  .carousel-inner {
-    /* make sure your .items will get correct height */
-    height: 150%;
-  }
-  
-  .item {
-    margin-top: 20px;
-    background-size: cover;
-    background-position: 50% 50%;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .item img {
-    visibility: hidden;
-  }
+/* FOOTER */
 
-.carousel-control-prev-icon, .carousel-control-next-icon{
-    filter: invert(1);
+.footer {
+    display: block;
+    background-color: #56CC9D;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 5px;
+    max-width: 100em;
+    margin-left: auto;
+    margin-right: auto;
 }
